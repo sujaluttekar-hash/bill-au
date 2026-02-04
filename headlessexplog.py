@@ -164,8 +164,10 @@ def log_expense(driver, booking_id, vendor, property_name, amount, sub_desc, bil
     
 # ------------------ Main ------------------
 def main():
-    username = "sujal.uttekar@stayvista.com"
-    password = "Sujal@2025"
+    username = os.getenv("STAYVISTA_USERNAME")
+    password = os.getenv("STAYVISTA_PASSWORD")
+    if not username or not password:
+        raise ValueError("Missing STAYVISTA_USERNAME or STAYVISTA_PASSWORD environment variables.")
     csv_file = "bills.csv"
     bills_folder = r"C:\Users\sujal\Untitled Folder 9\stayvista_invoices_pdf"
     driver = setup_driver()
@@ -199,12 +201,6 @@ def main():
 # ------------------ Run ------------------
 if __name__ == "__main__":
     main()
-    
-    
-# def main():
-#     output_folder = "/tmp/stayvista_invoices_pdf"
-#     username = "sujal.uttekar@stayvista.com"
-#     password = "Sujal@2025"
 
 #     # Open worksheet 
 #     worksheet = gs_client.open("test data exp").worksheet("a")
